@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="download.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet" />
+      <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vegetable Price Prediction</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-image:linear-gradient(#C5DFEB,#3CE682,#F0E9AD);
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      background-color: #76c8eb;
+      padding: 10px 0;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    nav a:hover {
+      background-color: #149cd2;
+      border-radius: 5px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="date"],
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #27ae60;
+      border-radius: 5px;
+      outline: none;
+      width: 250px;
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-20px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      background-image: linear-gradient(rgb(217, 245, 132),rgb(242, 196, 144));
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card h2 {
+      color: #27ae60;
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .card p {
+      font-size: 16px;
+      margin: 4px 0;
+    }
+
+    .predicted {
+      color: #2980b9;
+      font-weight: bold;
+    }
+
+    .actual {
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .footer {
+    height: 180px;
+    margin-top: 100px;
+    background-image:linear-gradient(rgb(146, 247, 210),rgb(228, 237, 232));
+    opacity: 0.8;
+  }
+  
+ .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .footlinks ul li {
+    margin-bottom: 15px;
+  }
+  
+  .footlinks ul li a {
+    font-size: 17px;
+    color: #dddddd;
+    display: block;
+    transition: ease 0.3s;
+  }
+  
+  .footlinks ul li a:hover {
+    transform: translate(6px);
+    color: white;
+  }
+  
+  .social a {
+    font-size: 25px;
+    margin: 4px;
+    height: 40px;
+    width: 40px;
+    color: rgb(21, 74, 74);
+    background-color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: ease 0.3s;
+  }
+  
+  .social a:hover {
+    transform: scale(1.2);
+  }
+  
+  .end {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 12px;
+  }
+  
+  .end p {
+    font-size: 15px;
+    color: rgb(240, 235, 235);
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/nutrient">Nutrient Information</a>
+    <a href="/seasonal">Seasonal Recommendations</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  
+  <h1>Vegetable Price Prediction</h1>
+
+  <div class="controls">
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date" onchange="updatePrices()">
+
+    <label for="search">Search:</label>
+    <input type="text" id="search" placeholder="Search for a vegetable..." onkeyup="filterVegetables()">
+  </div>
+
+  <hr><br>
+
+  <div id="vegetables" class="container">
+    <!-- Vegetable cards will be injected here -->
+  </div>
+
+  <script>
+    function getTodayDate() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    let vegetableData = [];
+
+    async function updatePrices() {
+      const date = document.getElementById('date').value;
+      if (!date) return;
+
+      try {
+        const response = await fetch(`/predict?date=${date}`);
+        vegetableData = await response.json();
+        displayVegetables(vegetableData);
+      } catch (error) {
+        console.error('Error fetching prices:', error);
+      }
+    }
+
+    function displayVegetables(data) {
+      const container = document.getElementById('vegetables');
+      container.innerHTML = '';
+
+      data.forEach(veg => {
+        container.innerHTML += `
+          <div class="card" data-name="${veg.display_name.toLowerCase()}">
+            <img src="/static/images/${veg.name}.jpg" alt="${veg.display_name}">
+            <h2>${veg.display_name}</h2>
+            <p class="predicted">Predicted: ₹${veg.predicted_price}/kg</p>
+            <p class="actual">Actual: ₹${veg.actual_price}/kg</p>
+          </div>`;
+      });
+    }
+
+    function filterVegetables() {
+      const searchQuery = document.getElementById('search').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const vegName = card.getAttribute('data-name');
+        card.style.display = vegName.includes(searchQuery) ? "block" : "none";
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('date').value = getTodayDate();
+      updatePrices();
+    });
+  </script>
+   <section class="footer">
+    <br>
+        <div class="footer-content">    
+                <div class="social">
+                    <a href="https://www.facebook.com" target="_blank"><i
+                            class="bx bxl-facebook"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i
+                            class="bx bxl-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i
+                            class="bx bxl-linkedin"></i></a>
+                    <a href="https://github.com/" target="_blank"><i class="bx bxl-github"></i></a>
+                </div>
+        </div>
+        <p class="end">
+            Copyright © 2025 Vegetable Price Prediction All Rights Reserved.</p>
+</section>
+
+</body>
+</html>

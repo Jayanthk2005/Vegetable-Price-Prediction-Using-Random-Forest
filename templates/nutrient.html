@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="download.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Nutritional Information</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image:linear-gradient(#C5DFEB,#3CE682,#F0E9AD);
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #76c8eb;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        nav a:hover {
+            background-color: #149cd2;
+            border-radius: 5px;
+        }
+
+        /* Nutrient Table Styles */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #35abf4;
+            color: white;
+        }
+
+        table tr:hover {
+            background-color: #f4f4f4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+           
+        }
+         
+.footer {
+    height: 180px;
+    margin-top: 100px;
+    background-image:linear-gradient(rgb(146, 247, 210),rgb(228, 237, 232));
+    opacity: 0.8;
+  }
+  
+ .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .footlinks ul li {
+    margin-bottom: 15px;
+  }
+  
+  .footlinks ul li a {
+    font-size: 17px;
+    color: #dddddd;
+    display: block;
+    transition: ease 0.3s;
+  }
+  
+  .footlinks ul li a:hover {
+    transform: translate(6px);
+    color: white;
+  }
+  
+  .social a {
+    font-size: 25px;
+    margin: 4px;
+    height: 40px;
+    width: 40px;
+    color: rgb(21, 74, 74);
+    background-color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: ease 0.3s;
+  }
+  
+  .social a:hover {
+    transform: scale(1.2);
+  }
+  
+  .end {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 12px;
+  }
+  
+  .end p {
+    font-size: 15px;
+    color: rgb(240, 235, 235);
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/nutrient">Nutrient Information</a>
+        <a href="/seasonal">Seasonal Recommendations</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+    <h1>Vegetable Nutritional Information</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Vegetable</th>
+                <th>Calories (per 100g)</th>
+                <th>Fiber (g)</th>
+                <th>Vitamin C (mg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veg, info in nutrient_info.items() %}
+            <tr>
+                <td>{{ veg.capitalize() }}</td>
+                <td>{{ info['calories'] }}</td>
+                <td>{{ info['fiber'] }}</td>
+                <td>{{ info['vitamin_c'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <section class="footer">
+        <br>
+            <div class="footer-content">    
+                    <div class="social">
+                        <a href="https://www.facebook.com" target="_blank"><i
+                                class="bx bxl-facebook"></i></a>
+                        <a href="https://www.instagram.com" target="_blank"><i
+                                class="bx bxl-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank"><i
+                                class="bx bxl-linkedin"></i></a>
+                        <a href="https://github.com/" target="_blank"><i class="bx bxl-github"></i></a>
+                    </div>
+            </div>
+            <p class="end">
+                Copyright © 2025 Vegetable Price Prediction All Rights Reserved.</p>
+    </section>
+
+</body>
+</html>
